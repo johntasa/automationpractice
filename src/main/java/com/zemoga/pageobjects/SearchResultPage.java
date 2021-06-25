@@ -1,6 +1,7 @@
 package com.zemoga.pageobjects;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.zemoga.utils.ExtentReportHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +10,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.zemoga.utils.GetScreenshot.getScreenshot;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -78,17 +81,19 @@ public class SearchResultPage {
         extentTest.createNode("Add product to cart").pass("User was able to add a product to shopping cart");
     }
 
-    public void validateAddedProduct(String added) {
+    public void validateAddedProduct(String added) throws IOException {
         try {
             assertEquals(added, lblProductAdded.getText());
             extentTest.createNode("Validate added product").pass("Product successfully added");
         } catch (Exception e) {
-            extentTest.createNode("Validate added product").fail("Product unsuccessfully added");
+            String screenshotPath = getScreenshot(driver, "screenshot");
+            extentTest.createNode("Validate added product").fail("Product unsuccessfully added",
+                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             throw new AssertionError("Product unsuccessfully added");
         }
     }
 
-    public void validateSortPrices() {
+    public void validateSortPrices() throws IOException {
 
         List<Float> priceList = new ArrayList<>();
         List<Float> priceListSorted = new ArrayList<>();
@@ -100,14 +105,16 @@ public class SearchResultPage {
         Collections.sort(priceListSorted);
 
         if (priceList != priceListSorted) {
-            extentTest.createNode("Validate sorted prices").fail("Results not properly sorted");
+            String screenshotPath = getScreenshot(driver, "screenshot");
+            extentTest.createNode("Validate sorted prices").fail("Results not properly sorted",
+                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             throw new AssertionError("Results not properly sorted");
         } else {
             extentTest.createNode("Validate sorted prices").pass("Results properly sorted");
         }
     }
 
-    public void validateResults(String search, String results) throws InterruptedException {
+    public void validateResults(String search, String results) throws InterruptedException, IOException {
         Thread.sleep(1000);
         try {
             for (WebElement productName : listProductsName) {
@@ -115,7 +122,9 @@ public class SearchResultPage {
             }
             extentTest.createNode("Validate search results").pass("Results properly show");
         } catch (Exception e) {
-            extentTest.createNode("Validate search results").fail("Results not properly show");
+            String screenshotPath = getScreenshot(driver, "screenshot");
+            extentTest.createNode("Validate search results").fail("Results not properly show",
+                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             throw new AssertionError("Results not properly show");
         }
         assertEquals(results, lblResultCounter.getText());

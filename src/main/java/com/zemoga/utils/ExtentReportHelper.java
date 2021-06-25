@@ -5,6 +5,10 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class ExtentReportHelper {
@@ -24,7 +28,8 @@ public class ExtentReportHelper {
     private static void createExtentReportIfNull() {
         if (extent == null) {
             extent = new ExtentReports();
-            spark = new ExtentSparkReporter("Test_Report.html");
+            String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+            spark = new ExtentSparkReporter(System.getProperty("user.dir") + "/reports/Test_Report" + dateName + ".html");
             extent.attachReporter(spark);
         }
     }

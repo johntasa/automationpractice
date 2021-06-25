@@ -1,7 +1,9 @@
 package com.zemoga.pageobjects;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.zemoga.utils.ExtentReportHelper;
+import com.zemoga.utils.GetScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,10 +11,12 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import static com.zemoga.utils.GenerateRandom.generateRandom;
+import static com.zemoga.utils.GetScreenshot.getScreenshot;
 import static org.junit.Assert.assertEquals;
 
 public class AuthenticationPage {
@@ -102,13 +106,16 @@ public class AuthenticationPage {
         extentTest.createNode("Proceed to checkout - Create Account step").pass("User created an account to proceed to checkout order");
     }
 
-    public void validateAuthenticationStep() throws InterruptedException {
+    public void validateAuthenticationStep() throws InterruptedException, IOException {
         Thread.sleep(3000);
         try {
             assertEquals("AUTHENTICATION", lblAuthentication.getText());
+
             extentTest.createNode("Validate authentication step").pass("Site is on Authentication view");
         } catch (Exception e) {
-            extentTest.createNode("Validate authentication step").fail("Site isn't on Authentication view");
+            String screenshotPath = getScreenshot(driver, "screenshot");
+            extentTest.createNode("Validate authentication step").fail("Site isn't on Authentication view",
+                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
             throw new AssertionError("Site isn't on Authentication view");
         }
     }

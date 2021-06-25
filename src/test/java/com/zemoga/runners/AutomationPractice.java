@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/automation_practice.feature",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         glue = {"com.zemoga.stepDefinitions"},
-        tags = "@ConfirmPurchase"
+        tags = ""
 )
 
 public class AutomationPractice {
