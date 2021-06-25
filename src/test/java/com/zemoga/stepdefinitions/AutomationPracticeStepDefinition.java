@@ -1,4 +1,4 @@
-package com.zemoga.stepDefinitions;
+package com.zemoga.stepdefinitions;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.zemoga.pageobjects.*;
