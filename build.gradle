@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.zemoga'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.11.1'
+    testCompile 'org.slf4j:slf4j-simple:1.7.25'
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '6.9.1'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '6.9.1'
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: '6.9.1'
+    testImplementation group: 'io.cucumber', name: 'cucumber-picocontainer', version: '6.10.4'
+    implementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.9.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.0.0-alpha-3'
+    compile 'net.serenity-bdd:serenity-junit:2.0.33'
+    implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.8'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '2.43.1'
+
+}
