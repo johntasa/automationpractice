@@ -1,4 +1,4 @@
-package com.zemoga.pageObjects;
+package com.zemoga.pageobjects;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.zemoga.utils.ExtentReportHelper;
@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import static com.zemoga.utils.GenerateRandom.generateRandom;
 import static org.junit.Assert.assertEquals;

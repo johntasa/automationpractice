@@ -1,4 +1,4 @@
-package com.zemoga.pageObjects;
+package com.zemoga.pageobjects;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.zemoga.utils.ExtentReportHelper;
@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.seleniumhq.jetty9.server.handler.HandlerWrapper;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +27,7 @@ public class PaymentPage {
     @FindBy(how = How.CSS, using = "p.cheque-indent")
     private WebElement lblOrderSummary;
 
-    public void proceedToCheckout() throws InterruptedException {
+    public void proceedToCheckout() {
         btnBankWire.click();
         extentTest.createNode("Proceed to checkout - Payment step").pass("User was able to proceed to checkout order");
     }

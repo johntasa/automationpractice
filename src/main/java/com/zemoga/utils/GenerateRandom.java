@@ -4,10 +4,11 @@ import java.util.Random;
 
 public class GenerateRandom {
 
+    private GenerateRandom() { throw new IllegalStateException("Utility class"); }
+
     public static int generateRandom() {
         int upperbound = 10000;
         Random rand = new Random();
-        int intRandom = rand.nextInt(upperbound);
-        return intRandom;
+        return rand.nextInt(upperbound);
     }
 }

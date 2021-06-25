@@ -1,7 +1,6 @@
 package com.zemoga.utils;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,27 +11,10 @@ public class ExtentReportHelper {
     private static ExtentReports extent;
     private static ExtentSparkReporter spark;
     private static WebDriver driver;
-    private static int DEFAULT_TIMEOUT = 10;
+    private static int defaultTimeout = 10;
 
-    /*public static void createReport() {
-        extent = new ExtentReports();
-
-        // creates a toggle for the given test, adds all log events under it
-
-
-        // log(LogStatus, details)
-        test.log(LogStatus.INFO, "This step shows usage of log(logStatus, details)");
-
-        // report with snapshot
-        String img = test.addScreenCapture("img-path");
-        test.log(LogStatus.INFO, "Image", "Image example: " + img);
-
-        // end test
-        extent.endTest(test);
-
-        // calling flush writes everything to the log file
-        extent.flush();
-    }*/
+    private ExtentReportHelper() {
+    }
 
     public static ExtentReports getExtentReport() {
         createExtentReportIfNull();
@@ -48,7 +30,7 @@ public class ExtentReportHelper {
     }
 
     public static WebDriver getWebDriver() {
-        return getWebDriver(DEFAULT_TIMEOUT);
+        return getWebDriver(defaultTimeout);
     }
 
     public static WebDriver getWebDriver(int timeoutInSeconds) {
@@ -58,10 +40,9 @@ public class ExtentReportHelper {
 
     private static void createWebDriverIfNull(int timeout) {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            String parent = driver.getWindowHandle();
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         }
     }

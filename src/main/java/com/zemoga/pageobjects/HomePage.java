@@ -1,4 +1,4 @@
-package com.zemoga.pageObjects;
+package com.zemoga.pageobjects;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.zemoga.utils.ExtentReportHelper;
@@ -8,22 +8,27 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class AddressesPage {
+public class HomePage {
 
     WebDriver driver;
     ExtentTest extentTest;
 
-    public AddressesPage(ExtentTest extentTest) {
+    public HomePage(ExtentTest extentTest) {
         this.driver = ExtentReportHelper.getWebDriver();
         this.extentTest = extentTest;
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(how = How.CSS, using = "button.btn.btn-default.button-medium")
-    private WebElement btnProceedToCheckout;
+    @FindBy(how = How.ID, using = "search_query_top")
+    private WebElement txtbxSearch;
 
-    public void proceedToCheckout() throws InterruptedException {
-        btnProceedToCheckout.click();
-        extentTest.createNode("Proceed to checkout - Addresses step").pass("User was able to proceed to checkout order");
+    @FindBy(how = How.CSS, using = "button.button-search")
+    private WebElement btnSearch;
+
+
+    public void performSearch(String search) {
+        txtbxSearch.sendKeys(search);
+        btnSearch.click();
+        extentTest.createNode("Perform a search").pass("User was able to search " + search);
     }
 }

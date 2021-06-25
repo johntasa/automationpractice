@@ -1,7 +1,7 @@
 package com.zemoga.stepDefinitions;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.zemoga.pageObjects.*;
+import com.zemoga.pageobjects.*;
 import com.zemoga.utils.ExtentReportHelper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -53,7 +53,7 @@ public class AutomationPracticeStepDefinition {
     }
 
     @Then("^user should see (.+) related to the (.+)$")
-    public void userShouldSeeRelatedToTheSearch(String results, String word) {
+    public void userShouldSeeRelatedToTheSearch(String results, String word) throws InterruptedException {
         searchResult = new SearchResultPage(extentTest);
         searchResult.validateResults(word, results);
     }

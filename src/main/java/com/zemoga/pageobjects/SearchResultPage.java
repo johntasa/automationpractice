@@ -1,4 +1,4 @@
-package com.zemoga.pageObjects;
+package com.zemoga.pageobjects;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.zemoga.utils.ExtentReportHelper;
@@ -55,30 +55,23 @@ public class SearchResultPage {
     private WebElement btnProceedToCheckoutFrame;
 
 
-    public void proceedToCheckoutFrame() throws InterruptedException {
+    public void proceedToCheckoutFrame() {
         driver.switchTo().defaultContent();
         btnProceedToCheckoutFrame.click();
     }
 
-    public void sortResults(String sort) {
+    public void sortResults(String sort) throws InterruptedException {
         for (WebElement sortProduct : drpdwnSortProduct) {
             if (sortProduct.getText().contains(sort)) {
                 sortProduct.click();
                 extentTest.createNode("Perform lower price sort").pass("User was able to sort price");
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                }
-                break;
+                Thread.sleep(3000);
             }
         }
     }
 
     public void addToCart() throws InterruptedException {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-        }
+        Thread.sleep(3000);
         imgProduct.click();
         driver.switchTo().frame(iframeProduct);
         btnAddToCart.click();
@@ -97,8 +90,8 @@ public class SearchResultPage {
 
     public void validateSortPrices() {
 
-        List<Float> priceList = new ArrayList<Float>();
-        List<Float> priceListSorted = new ArrayList<Float>();
+        List<Float> priceList = new ArrayList<>();
+        List<Float> priceListSorted = new ArrayList<>();
 
         for (WebElement productPrice : listProductsPrice) {
             priceListSorted.add(Float.parseFloat(productPrice.getText().replace("$", "")));
@@ -114,13 +107,8 @@ public class SearchResultPage {
         }
     }
 
-    public void validateResults(String search, String results) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+    public void validateResults(String search, String results) throws InterruptedException {
+        Thread.sleep(1000);
         try {
             for (WebElement productName : listProductsName) {
                 assertTrue(productName.getText().contains(search));
