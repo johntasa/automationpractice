@@ -45,7 +45,7 @@ public class ExtentReportHelper {
 
     private static void createWebDriverIfNull(int timeout) {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);

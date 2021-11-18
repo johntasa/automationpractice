@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features/automation_practice.feature",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        glue = {"com.zemoga.stepDefinitions"},
+        glue = {"com.zemoga.stepdefinitions"},
         tags = ""
 )
 
